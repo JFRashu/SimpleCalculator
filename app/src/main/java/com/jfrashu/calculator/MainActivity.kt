@@ -5,24 +5,16 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
-import net.objecthunter.exp4j.ExpressionBuilder
-import net.objecthunter.exp4j.function.Function
 import kotlin.math.PI
-import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var inputExpression: EditText
     private lateinit var displayResult: TextView
-
-    // Define sqrt function properly using exp4j Function class
-    private val sqrtFunction = object : Function("sqrt", 1) {
-        override fun apply(vararg args: Double): Double {
-            return sqrt(args[0])
-        }
-    }
+    private val viewModel: CalculatorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +23,24 @@ class MainActivity : AppCompatActivity() {
         inputExpression = findViewById(R.id.input_expression)
         displayResult = findViewById(R.id.display_result)
 
+        setupObservers()
         setupNumberButtons()
         setupOperatorButtons()
         setupSpecialButtons()
         setupInputChangeListener()
+    }
+
+    private fun setupObservers() {
+        viewModel.expression.observe(this) { expression ->
+            if (inputExpression.text.toString() != expression) {
+                inputExpression.setText(expression)
+                inputExpression.setSelection(expression.length)
+            }
+        }
+
+        viewModel.result.observe(this) { result ->
+            displayResult.text = result
+        }
     }
 
     private fun setupNumberButtons() {
@@ -46,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         numberIds.forEach { id ->
             findViewById<MaterialButton>(id).setOnClickListener {
-                appendToExpression((it as MaterialButton).text.toString())
+                viewModel.appendToExpression((it as MaterialButton).text.toString())
             }
         }
     }
@@ -59,41 +65,36 @@ class MainActivity : AppCompatActivity() {
 
         operatorIds.forEach { id ->
             findViewById<MaterialButton>(id).setOnClickListener {
-                appendToExpression((it as MaterialButton).text.toString())
+                viewModel.appendToExpression((it as MaterialButton).text.toString())
             }
         }
     }
 
     private fun setupSpecialButtons() {
         findViewById<MaterialButton>(R.id.button_pi).setOnClickListener {
-            appendToExpression(PI.toString())
+            viewModel.appendToExpression(PI.toString())
         }
 
         findViewById<MaterialButton>(R.id.button_square).setOnClickListener {
-            val currentText = inputExpression.text.toString()
-            if (currentText.isNotEmpty()) {
-                appendToExpression("^2")
+            if (viewModel.expression.value?.isNotEmpty() == true) {
+                viewModel.appendToExpression("^2")
             }
         }
 
         findViewById<MaterialButton>(R.id.button_root).setOnClickListener {
-            appendToExpression("√(")
+            viewModel.appendToExpression("√(")
         }
 
         findViewById<MaterialButton>(R.id.button_ac).setOnClickListener {
-            inputExpression.setText("")
-            displayResult.text = "0"
+            viewModel.clearAll()
         }
 
         findViewById<MaterialButton>(R.id.button_clear).setOnClickListener {
-            val currentText = inputExpression.text.toString()
-            if (currentText.isNotEmpty()) {
-                inputExpression.setText(currentText.substring(0, currentText.length - 1))
-            }
+            viewModel.clearLast()
         }
 
         findViewById<MaterialButton>(R.id.button_equal).setOnClickListener {
-            calculateResult(true)
+            viewModel.calculateResult(true)
         }
     }
 
@@ -102,60 +103,13 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                calculateResult(false)
+                val newText = s?.toString() ?: ""
+                if (viewModel.expression.value != newText) {
+                    viewModel.appendToExpression(newText)
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-    }
-
-    private fun appendToExpression(value: String) {
-        val currentText = inputExpression.text.toString()
-        val newText = currentText + value
-        inputExpression.setText(newText)
-        inputExpression.setSelection(newText.length)
-    }
-
-    private fun calculateResult(isEqualPressed: Boolean) {
-        try {
-            val expression = inputExpression.text.toString()
-                .replace("×", "*")
-                .replace("÷", "/")
-                .replace("π", PI.toString())
-
-            if (expression.isEmpty()) {
-                displayResult.text = "0"
-                return
-            }
-
-            val result = evaluateExpression(expression)
-
-            if (isEqualPressed) {
-                inputExpression.setText(formatResult(result))
-                inputExpression.setSelection(inputExpression.text.length)
-                displayResult.text = "0"
-            } else {
-                displayResult.text = formatResult(result)
-            }
-        } catch (e: Exception) {
-            if (isEqualPressed) {
-                displayResult.text = "Error"
-            }
-        }
-    }
-
-    private fun evaluateExpression(expression: String): Double {
-        return ExpressionBuilder(expression)
-            .function(sqrtFunction)  // Using the properly defined sqrt function
-            .build()
-            .evaluate()
-    }
-
-    private fun formatResult(result: Double): String {
-        return if (result % 1 == 0.0) {
-            result.toLong().toString()
-        } else {
-            String.format("%.8f", result).trimEnd('0').trimEnd('.')
-        }
     }
 }
