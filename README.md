@@ -5,16 +5,24 @@ A modern, user-friendly calculator application for Android with both portrait an
 ## Screenshots
 
 ### App Icon
-<img src="Screenshots/shortcut_calculator.jpeg" width="300" height="600" alt="Calculator App Icon"/>
+<p align="center">
+<img src="Screenshots/shortcut_calculator.jpeg" width="300" height="300" alt="Calculator App Icon"/>
+</p>
 
 ### Get Started Screen
+<p align="center">
 <img src="Screenshots/getstarted.jpg" width="300" height="600" alt="Get Started Screen"/>
+</p>
 
 ### Portrait Mode
+<p align="center">
 <img src="Screenshots/Portrait_mode.jpg" width="300" height="600" alt="Calculator Portrait Mode"/>
+</p>
 
 ### Landscape Mode
+<p align="center">
 <img src="Screenshots/Landscape_mode.jpg" width="600" height="300" alt="Calculator Landscape Mode"/>
+</p>
 
 ## Features
 
