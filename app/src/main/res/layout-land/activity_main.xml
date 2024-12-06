@@ -127,6 +127,7 @@
                 app:cornerRadius="18dp"
                 style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
                 android:text="√"
+                android:paddingTop="0dp"
                 android:textSize="32dp"
                 android:layout_margin="12dp"
                 android:background="@drawable/curved_button_background_high"
