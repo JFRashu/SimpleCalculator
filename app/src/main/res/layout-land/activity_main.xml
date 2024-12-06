@@ -13,6 +13,7 @@
     <!-- Left side: Display and Results -->
     <LinearLayout
         android:id="@+id/calculation"
+        android:weightSum="3"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
@@ -23,6 +24,7 @@
         <!-- Input Expression Display -->
         <EditText
             android:id="@+id/input_expression"
+            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -40,6 +42,8 @@
             android:id="@+id/result_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -47,8 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="="
+                android:gravity="bottom"
+                android:textAlignment="textEnd"
                 android:paddingTop="10dp"
-                android:gravity="center_horizontal"
+
                 android:textSize="40sp"
                 android:textColor="@color/white"/>
 
@@ -56,7 +62,8 @@
                 android:id="@+id/display_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="end"
+                android:gravity="bottom"
+                android:textAlignment="textEnd"
                 android:text="0"
                 android:textSize="40sp"
                 android:textColor="@color/white"
@@ -424,7 +431,8 @@
                 app:cornerRadius="18dp"
                 style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
                 android:text="."
-                android:paddingBottom="15dp"
+                android:paddingTop="0dp"
+
                 android:textSize="35dp"
                 android:textStyle="bold"
                 android:layout_margin="12dp"
@@ -453,8 +461,8 @@
                 app:cornerRadius="20dp"
                 style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
                 android:text="%"
-                android:paddingBottom="15dp"
-                android:textSize="20sp"
+                android:paddingTop="3dp"
+                android:textSize="25sp"
                 android:layout_margin="12dp"
                 android:background="@drawable/curved_button_background_high"
                 app:backgroundTint="@color/md_theme_primaryContainer_highContrast"
