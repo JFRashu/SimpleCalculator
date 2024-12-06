@@ -5,31 +5,31 @@ A modern, user-friendly calculator application for Android with both portrait an
 ## Screenshots
 
 ### App Icon
-![Calculator App Icon](Screenshots/shortcut_calculator.jpeg)
+<img src="Screenshots/shortcut_calculator.jpeg" width="300" height="600" alt="Calculator App Icon"/>
 
 ### Get Started Screen
-![Get Started Screen](Screenshots/getstarted.jpg)
+<img src="Screenshots/getstarted.jpg" width="300" height="600" alt="Get Started Screen"/>
 
 ### Portrait Mode
-![Calculator Portrait Mode](Screenshots/Portrait_mode.jpg)
+<img src="Screenshots/Portrait_mode.jpg" width="300" height="600" alt="Calculator Portrait Mode"/>
 
 ### Landscape Mode
-![Calculator Landscape Mode](Screenshots/Landscape_mode.jpg)
+<img src="Screenshots/Landscape_mode.jpg" width="600" height="300" alt="Calculator Landscape Mode"/>
 
 ## Features
 
 - **Intuitive User Interface**: Clean and modern design for easy calculation
 - **Responsive Layouts**:
-    - Fully functional portrait mode
-    - Optimized landscape mode for wider screens
+  - Fully functional portrait mode
+  - Optimized landscape mode for wider screens
 - **Comprehensive Calculation Support**:
-    - Basic arithmetic operations
-    - Responsive button interactions
+  - Basic arithmetic operations
+  - Responsive button interactions
 - **State Preservation**:
-    - ViewModel architecture ensures smooth state management during device rotation
+  - ViewModel architecture ensures smooth state management during device rotation
 - **Modern Design**:
-    - Material Design principles
-    - Smooth, animated button interactions
+  - Material Design principles
+  - Smooth, animated button interactions
 
 ## Technical Architecture
 
@@ -40,8 +40,8 @@ A modern, user-friendly calculator application for Android with both portrait an
 - **State Management**: ViewModel for rotation handling
 
 ### Compatibility
-- **Minimum SDK Version**: [Specify your minimum SDK version]
-- **Target SDK Version**: [Specify your target SDK version]
+- **Minimum SDK Version**: 21
+- **Target SDK Version**: 34
 
 ### Key Components
 - `CalculatorViewModel`: Manages calculation logic and app state
@@ -75,87 +75,11 @@ The app uses a ViewModel to preserve calculation state during device rotation. K
 - Preventing unnecessary recalculations
 - Maintaining user experience across configuration changes
 
-### Example ViewModel Structure
-```kotlin
-class CalculatorViewModel : ViewModel() {
-
-  private val _expression = MutableLiveData<String>("")
-  val expression: LiveData<String> = _expression
-
-  private val _result = MutableLiveData<String>("0")
-  val result: LiveData<String> = _result
-
-  private val sqrtFunction = object : Function("sqrt", 1) {
-    override fun apply(vararg args: Double): Double {
-      return sqrt(args[0])
-    }
-  }
-
-  fun appendToExpression(value: String) {
-    val currentText = _expression.value ?: ""
-    _expression.value = currentText + value
-    calculateResult(false)
-  }
-
-  fun clearAll() {
-    _expression.value = ""
-    _result.value = "0"
-  }
-
-  fun clearLast() {
-    val currentText = _expression.value ?: ""
-    if (currentText.isNotEmpty()) {
-      _expression.value = currentText.substring(0, currentText.length - 1)
-      calculateResult(false)
-    }
-  }
-
-  fun calculateResult(isEqualPressed: Boolean) {
-    try {
-      val expressionText = _expression.value ?: ""
-      val sanitizedExpression = expressionText
-        .replace("×", "*")
-        .replace("÷", "/")
-        .replace("π", PI.toString())
-
-      if (sanitizedExpression.isEmpty()) {
-        _result.value = "0"
-        return
-      }
-
-      val calculatedResult = evaluateExpression(sanitizedExpression)
-      val formattedResult = formatResult(calculatedResult)
-
-      if (isEqualPressed) {
-        _expression.value = formattedResult
-        _result.value = "0"
-      } else {
-        _result.value = formattedResult
-      }
-    } catch (e: Exception) {
-      if (isEqualPressed) {
-        _result.value = "Error"
-      }
-    }
-  }
-
-  private fun evaluateExpression(expression: String): Double {
-    return ExpressionBuilder(expression)
-      .function(sqrtFunction)
-      .build()
-      .evaluate()
-  }
-
-  private fun formatResult(result: Double): String {
-    return if (result % 1 == 0.0) {
-      result.toLong().toString()
-    } else {
-      String.format("%.8f", result).trimEnd('0').trimEnd('.')
-    }
-  }
-}
-
-```
+### Key ViewModel Features
+- Expression and result state management
+- Support for complex calculations
+- Error handling
+- Flexible input processing
 
 ## Contribution Guidelines
 
@@ -173,8 +97,9 @@ class CalculatorViewModel : ViewModel() {
 
 ## Contact
 
-- **Author**: [Jannatul Farzana Rashumoni]
-- **Email**: [u2004090@student.cuet.ac.bd]
+- **Author**: Jannatul Farzana Rashumoni
+- **Email**: u2004090@student.cuet.ac.bd
+- **GitHub**: [JFRashu](https://github.com/JFRashu)
 
 ---
 
