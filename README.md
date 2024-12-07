@@ -1,6 +1,10 @@
 # Calculator App
 
-A modern, user-friendly calculator application for Android with both portrait and landscape modes, designed with a robust ViewModel to handle device rotation seamlessly.
+A simple, user-friendly calculator application for Android with both portrait and landscape modes, designed with a robust ViewModel to handle device rotation seamlessly. This project was developed as a learning exercise during the Edge Course Mobile App Development program under the mentorship of Sourav Palit (Principal App Engineer, Getonnet) and Hasan Murad (Assistant Professor of CSE, CUET).
+
+## Project Context
+
+This calculator app serves as a practical implementation of ViewModel architecture and rotation handling in Android development. It was created as part of my ongoing journey in mobile app development while studying Computer Science and Engineering at Chittagong University of Engineering & Technology (CUET).
 
 ## Screenshots
 
@@ -77,7 +81,7 @@ A modern, user-friendly calculator application for Android with both portrait an
 
 ## ViewModel Rotation Handling
 
-The app uses a ViewModel to preserve calculation state during device rotation. Key benefits include:
+This project specifically focuses on implementing proper state management during device rotation using ViewModel. Key benefits include:
 
 - Seamless state preservation
 - Preventing unnecessary recalculations
@@ -88,6 +92,15 @@ The app uses a ViewModel to preserve calculation state during device rotation. K
 - Support for complex calculations
 - Error handling
 - Flexible input processing
+
+## Learning Objectives
+
+This project demonstrates practical implementation of:
+- MVVM Architecture principles
+- ViewModel lifecycle management
+- Screen rotation handling
+- UI state preservation
+- Material Design implementation
 
 ## Contribution Guidelines
 
@@ -108,10 +121,16 @@ The app uses a ViewModel to preserve calculation state during device rotation. K
 - **Author**: Jannatul Farzana Rashumoni
 - **Email**: u2004090@student.cuet.ac.bd
 - **GitHub**: [JFRashu](https://github.com/JFRashu)
+- **Institution**: Chittagong University of Engineering & Technology (CUET)
+- **Course**: Edge Course Mobile App Development
 
----
+## Acknowledgments
 
-### Future Enhancements
+Special thanks to:
+- Sourav Palit (Principal App Engineer, Getonnet) - Course Mentor
+- Hasan Murad (Assistant Professor of CSE, CUET) - Course Mentor
+
+## Future Enhancements
 - Scientific calculator mode
 - Memory function
 - Theme customization
