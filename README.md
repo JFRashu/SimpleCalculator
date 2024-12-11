@@ -15,7 +15,7 @@ This calculator app serves as a practical implementation of ViewModel architectu
 
 ### Get Started Screen
 <p align="center">
-<img src="Screenshots/getstarted.jpg" width="300" height="600" alt="Get Started Screen"/>
+<img src="Screenshots/calculator_background.jpg" width="300" height="600" alt="Get Started Screen"/>
 </p>
 
 ### Portrait Mode
@@ -127,7 +127,7 @@ This project demonstrates practical implementation of:
 ## Acknowledgments
 
 Special thanks to:
-- Sourav Palit (Principal App Engineer, Getonnet) - Course Mentor
+- Sourav Palit (Principal App Engineer, GetOnNet) - Course Mentor
 - Hasan Murad (Assistant Professor of CSE, CUET) - Course Mentor
 
 ## Future Enhancements
